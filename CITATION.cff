@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "GISGPT: VFM-native Spatial Foundation Model Research Scaffold"
+message: "If you use this research scaffold, please cite the repository and the specific released version."
+type: software
+authors:
+  - family-names: "Ngo"
+    given-names: "Long"
+repository-code: "https://github.com/Base27-CVNSS/GISGPT"
+license: Apache-2.0
+version: 0.1.0
+date-released: 2026-09-27
