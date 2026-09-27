@@ -108,6 +108,7 @@ GISGPT/
 ├─ scripts/
 │  ├─ build_vfm_dataset.py
 │  ├─ generate_spatial_tasks.py
+│  ├─ train_sft.py
 │  └─ validate_vfm.py
 ├─ configs/
 │  ├─ pretrain.yaml
@@ -129,6 +130,19 @@ python -m pip install -e .
 python scripts/validate_vfm.py examples/sample.vfm.json
 python scripts/generate_spatial_tasks.py examples/sample.vfm.json /tmp/vfm_tasks.jsonl
 ```
+
+Optional training dependencies:
+
+```bash
+python -m pip install -e ".[train]"
+python scripts/train_sft.py \
+  --model YOUR_OPEN_BASE_MODEL \
+  --data /tmp/vfm_tasks.jsonl \
+  --output outputs/vfm-spatiallm-sft \
+  --lora
+```
+
+The included SFT runner covers text/tool-planning behavior only. Raster, point-cloud, BIM, trajectory and sensor encoders are intentionally left as explicit research modules rather than being hidden behind a claim of "multimodal support".
 
 ## Research questions
 
