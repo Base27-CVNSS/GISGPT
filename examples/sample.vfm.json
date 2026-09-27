@@ -1,0 +1,82 @@
+{
+  "vfm_version": "0.1-draft",
+  "dataset_id": "demo-city-block",
+  "sample_id": "scene-0001",
+  "crs": {
+    "authority": "EPSG",
+    "code": "32648",
+    "axis_order": "xy"
+  },
+  "bbox": [500000.0, 1200000.0, 500500.0, 1200500.0],
+  "time_extent": {
+    "start": "2026-01-01T00:00:00Z",
+    "end": "2026-01-01T00:05:00Z"
+  },
+  "assets": [
+    {
+      "id": "geom-buildings",
+      "modality": "vector",
+      "uri": "data/buildings.parquet",
+      "media_type": "application/vnd.apache.parquet"
+    },
+    {
+      "id": "scan-001",
+      "modality": "point_cloud",
+      "uri": "data/scan-001.laz",
+      "media_type": "application/vnd.laszip"
+    },
+    {
+      "id": "sensor-air-001",
+      "modality": "sensor",
+      "uri": "data/air-quality.jsonl",
+      "media_type": "application/jsonl"
+    }
+  ],
+  "entities": [
+    {
+      "id": "building:A",
+      "type": "building",
+      "geometry_ref": "geom-buildings",
+      "bbox": [500050.0, 1200050.0, 500120.0, 1200130.0],
+      "semantic_labels": ["built_environment", "bim_candidate"]
+    },
+    {
+      "id": "road:R1",
+      "type": "road",
+      "bbox": [500000.0, 1200000.0, 500500.0, 1200040.0],
+      "semantic_labels": ["transport"]
+    }
+  ],
+  "relations": [
+    {
+      "subject": "building:A",
+      "predicate": "north_of",
+      "object": "road:R1",
+      "confidence": 1.0,
+      "evidence": ["validated_geometry"]
+    }
+  ],
+  "indexes": {
+    "spatial": "hilbert",
+    "temporal": "interval",
+    "entity": "stable_id",
+    "semantic": "external_dictionary"
+  },
+  "split": "train",
+  "split_key": {
+    "spatial_cell": "cell-48N-demo-001",
+    "temporal_bucket": "2026-01",
+    "scene_id": "scene-0001",
+    "source_group": "synthetic-demo"
+  },
+  "provenance": [
+    {
+      "source": "synthetic example",
+      "license": "CC0-1.0",
+      "transform_history": ["created for schema demonstration"]
+    }
+  ],
+  "metadata": {
+    "purpose": "schema and task-generation example"
+  }
+}
