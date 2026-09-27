@@ -1,0 +1,27 @@
+stage: domain_adaptive_pretraining
+project: VFM-SpatialLM
+base_model: REPLACE_WITH_OPEN_MODEL
+data:
+  format: jsonl
+  fields:
+    - spatial_text
+    - entity_graph
+    - topology
+    - temporal_context
+    - tool_docs
+  leakage_safe_split: true
+training:
+  objective: causal_language_modeling
+  precision: bf16
+  sequence_length: 4096
+  parameter_efficient: true
+  adapter: lora
+evaluation:
+  holdout:
+    - geography
+    - time
+    - scene
+    - source
+notes:
+  - Do not serialize raw coordinates without CRS and unit metadata.
+  - Keep deterministic geometry computation outside the language-model loss.
