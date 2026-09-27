@@ -1,0 +1,29 @@
+stage: supervised_instruction_tuning
+project: VFM-SpatialLM
+base_model: REPLACE_WITH_PRETRAINED_CHECKPOINT
+data:
+  format: jsonl
+  task_families:
+    - spatial_relation
+    - spatial_intent
+    - workflow_planning
+    - tool_selection
+    - crs_diagnosis
+    - provenance_reasoning
+    - error_diagnosis
+    - result_explanation
+training:
+  parameter_efficient: true
+  adapter: lora
+  precision: bf16
+safety:
+  require_tool_validation_for:
+    - metric_distance
+    - area
+    - topology
+    - coordinate_transform
+    - routing
+    - raster_algebra
+evaluation:
+  executable_workflow_required: true
+  calibration_required: true
